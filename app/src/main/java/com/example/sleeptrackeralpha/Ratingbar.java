@@ -1,8 +1,9 @@
 package com.example.sleeptrackeralpha;
 
 import androidx.appcompat.app.AppCompatActivity;
-import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -17,6 +18,7 @@ public class Ratingbar extends AppCompatActivity {
     private RatingBar ratingBar;
     private TextView txtRatingValue;
     private Button btnSubmit;
+    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,10 +57,13 @@ public class Ratingbar extends AppCompatActivity {
 
             @Override
             public void onClick(View v) {
-
                 Toast.makeText(Ratingbar.this,
                         String.valueOf(ratingBar.getRating()),
                         Toast.LENGTH_SHORT).show();
+                sharedPreferences = getSharedPreferences("SaveData", Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPreferences.edit();
+                editor.putString("arvio" ,"Rating:  " + ratingBar.getRating());
+                editor.apply();
                 startActivity( new Intent(Ratingbar.this, MainActivity.class));
             }
 

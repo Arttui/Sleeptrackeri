@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <android.widget.TextClock
-        android:id="@+id/TextClock"
+        android:id="@+id/juttu"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:format12Hour="dd.MM.yyyy"
