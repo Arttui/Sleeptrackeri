@@ -35,8 +35,8 @@ public class Ratingbar extends AppCompatActivity {
         ratingBar = (RatingBar) findViewById(R.id.ratingBar);
         txtRatingValue = (TextView) findViewById(R.id.txtRatingValue);
 
-        //if rating value is changed,
-        //display the current rating value in the result (textview) automatically
+        //Kun ratingbarin arvo muuttuu,
+        //se näkyy automaattisesti tekstikentässä
         ratingBar.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
             public void onRatingChanged(RatingBar ratingBar, float rating,
                                         boolean fromUser) {
@@ -68,9 +68,6 @@ public class Ratingbar extends AppCompatActivity {
                 startActivity( new Intent(Ratingbar.this, MainActivity.class));
             }
 
-         //   public void MainActivity(View v) {
-           //     startActivity( new Intent(Ratingbar.this, MainActivity.class));
-          //  }
         });
 
     }
