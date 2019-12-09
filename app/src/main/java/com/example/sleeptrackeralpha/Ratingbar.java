@@ -52,7 +52,8 @@ public class Ratingbar extends AppCompatActivity {
         ratingBar = (RatingBar) findViewById(R.id.ratingBar);
         btnSubmit = (Button) findViewById(R.id.btnSubmit);
 
-        //if click on me, then display the current rating value.
+        //Submit nappia painettaessa ratingbarin arvo tallentuu sharedpreferenssin
+        //ja näkyy myös ponnahdusikkunassa käyttäjälle
         btnSubmit.setOnClickListener(new OnClickListener() {
 
             @Override

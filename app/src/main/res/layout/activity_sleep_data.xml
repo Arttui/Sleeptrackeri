@@ -5,7 +5,7 @@
     android:id="@+id/Constraintlayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
+    android:background="@drawable/background"
     tools:context=".SleepData">
 
 
@@ -51,6 +51,7 @@
         android:layout_marginTop="68dp"
         android:text="Most Recent Sleep Recorded:"
         android:textAppearance="@style/TextAppearance.AppCompat.Body2"
+        android:gravity="center"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
