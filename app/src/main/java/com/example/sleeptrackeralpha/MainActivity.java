@@ -11,6 +11,12 @@ import android.view.View;
 import android.widget.Chronometer;
 import android.widget.TextClock;
 
+/**
+ * Sisältää metodit ajastimen käynnistykseen, sammuttamiseen ja
+ * SleepData aktiviteettiin siirtymiseen
+ * @author Arttu Iso-Kuortti
+ * @version 1.0
+ */
 
 public class MainActivity extends AppCompatActivity {
 
@@ -20,15 +26,23 @@ public class MainActivity extends AppCompatActivity {
     private boolean kaynnissa;
     SharedPreferences sharedPreferences;
 
+    /**
+     * Asettaa arvot xml.tiedoston kohteille
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ajastin = findViewById(R.id.kello);
-        ajastin.setBase(SystemClock.elapsedRealtime());
         juttu = this.findViewById(R.id.juttu);
+        ajastin.setBase(SystemClock.elapsedRealtime());
     }
 
+    /**
+     * Start-näppäintä painettaessa käynnistää ajastimen
+     * @param v
+     */
     public void startti(View v) {
 
         //Jos ajastin on jo käynnissä "startti" ei tee mitään
@@ -41,9 +55,14 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * Stop-näppäintä painettaessa sammuttaa ajastimen, tallentaa arvot SharedPreferenssiin
+     * ja käynnistää Ratingbar aktiviteetin
+     * @param v
+     */
     public void resetti(View v) {
 
-        //Asettaa arvot SharedPreferenssiin
+        //Asettaa kuluneen ajan ja päivämäärän SharedPreferenssiin
         sharedPreferences = getSharedPreferences("SaveData", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sharedPreferences.edit();
         editor.putString("aika", "Time slept:  " + ajastin.getText().toString());
@@ -61,8 +80,13 @@ public class MainActivity extends AppCompatActivity {
         startActivity(unenlaatu);
     }
 
-    //Käynnistää SleepData aktiviteetin
+    /**
+     * Sleepdata-näppäintä painettaessa käynnistää SleepData aktiviteetin
+     * @param v
+     */
     public void historia(View v){
+
+        //Käynnistää SleepData aktiviteetin
         Intent historia = new Intent(getBaseContext(), SleepData.class);
         startActivity(historia);
     }

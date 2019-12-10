@@ -7,15 +7,28 @@ import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.widget.TextView;
 
+/**
+ * Näyttää käyttäjälle viimeisimmän nukutun yön tiedot
+ * @author Aku Korhonen
+ * @version 1.0
+ */
 
 public class SleepData extends AppCompatActivity {
 
-    TextView arvo, arvo2, arvo3;
+    private TextView arvo, arvo2, arvo3;
 
+    /**
+     * Asettaa arvot xml.tiedoston kohteille,
+     * hakee arvot SharedPreferenssistä,
+     * asettaa päivämäärän, kuluneen ajan ja käyttäjän arvion tekstikenttiin
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sleep_data);
+
+        //Asettaa arvot xml.tiedoston kohteille
         arvo = this.findViewById(R.id.lopputulos);
         arvo2 = this.findViewById(R.id.lopputulos2);
         arvo3 = this.findViewById(R.id.lopputulos3);

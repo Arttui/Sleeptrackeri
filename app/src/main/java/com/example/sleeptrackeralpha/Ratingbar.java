@@ -13,6 +13,12 @@ import android.widget.RatingBar.OnRatingBarChangeListener;
 import android.widget.TextView;
 import android.widget.Toast;
 
+/**
+ * Kysyy käyttäjältä arviota unenlaadustaan ja tallettaa sen sharedpreferenssiin
+ * @author Tomi Laine
+ * @version 1.0
+ */
+
 public class Ratingbar extends AppCompatActivity {
 
     private RatingBar ratingBar;
@@ -20,24 +26,31 @@ public class Ratingbar extends AppCompatActivity {
     private Button btnSubmit;
     SharedPreferences sharedPreferences;
 
+    /**
+     * Kutsuu metodeja addListenerOnRatingBar(), addListenerOnButton() ja
+     * asettaa arvot xml.tiedoston kohteille
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ratingbar);
+        ratingBar = findViewById(R.id.ratingBar);
+        txtRatingValue = findViewById(R.id.txtRatingValue);
+        btnSubmit = findViewById(R.id.btnSubmit);
 
         addListenerOnRatingBar();
         addListenerOnButton();
-
     }
 
+    /**
+     * Asettaa kuuntelijan ratingbariin,
+     * kun ratingbarin arvo muuttuu uusi arvo näkyy heti tekstikentässä
+     */
     public void addListenerOnRatingBar() {
 
-        ratingBar = (RatingBar) findViewById(R.id.ratingBar);
-        txtRatingValue = (TextView) findViewById(R.id.txtRatingValue);
-
-        //Kun ratingbarin arvo muuttuu,
-        //se näkyy automaattisesti tekstikentässä
         ratingBar.setOnRatingBarChangeListener(new OnRatingBarChangeListener() {
+
             public void onRatingChanged(RatingBar ratingBar, float rating,
                                         boolean fromUser) {
 
@@ -47,24 +60,30 @@ public class Ratingbar extends AppCompatActivity {
         });
     }
 
+    /**
+     * Asettaa kuuntelijan submit-painikkeeseen,
+     * Submit nappia painettaessa ratingbarin arvo tallentuu sharedpreferenssin
+     * ja näkyy myös ponnahdusikkunassa käyttäjälle
+     */
     public void addListenerOnButton() {
 
-        ratingBar = (RatingBar) findViewById(R.id.ratingBar);
-        btnSubmit = (Button) findViewById(R.id.btnSubmit);
-
-        //Submit nappia painettaessa ratingbarin arvo tallentuu sharedpreferenssin
-        //ja näkyy myös ponnahdusikkunassa käyttäjälle
         btnSubmit.setOnClickListener(new OnClickListener() {
 
             @Override
             public void onClick(View v) {
+
+                //Näyttää käyttäjän arvion ponnahdusikkunassa
                 Toast.makeText(Ratingbar.this,
                         String.valueOf(ratingBar.getRating()),
                         Toast.LENGTH_SHORT).show();
+
+                //Asettaa käyttäjän arvion SharedPreferenssiin
                 sharedPreferences = getSharedPreferences("SaveData", Context.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("arvio" ,"Rating:  " + ratingBar.getRating());
                 editor.apply();
+
+                //Käynnistää MainActivityn
                 startActivity( new Intent(Ratingbar.this, MainActivity.class));
             }
 
